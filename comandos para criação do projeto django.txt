@@ -1,5 +1,5 @@
 
-Extensão para instalar o banco de Dados - ALTERADO 2
+Extensão para instalar o banco de Dados - ALTERADO 3
 sqlite viewer
 
 (fase do projeto)

@@ -1,0 +1,73 @@
+
+Extensão para instalar o banco de Dados
+sqlite viewer
+
+(fase do projeto)
+1-instalar do django:
+
+py -m pip install Django
+pip install django
+
+****************************************************************************************************
+2-criação do projeto:
+
+django-admin startproject django Project
+python -m django startproject drone
+
+Obs.: Acesse a pasta nova do projeto
+******************************************************************************************************************************
+3-execução do projeto:
+
+python manage.py runserver
+
+*****************************************************************************************************************************
+4-Criação da migrate para o bd:
+
+python manage.py migrate
+
+*******************************************************************************************************************************
+(fase do app)
+5-Criação do app drone:
+python -m django startapp drone.
+obs.: coloque/configure o app dentro da classe app que estar dentro do setting.
+Obs2.: Incluir o app dentro do método INSTALLED_APPS no arquivo setting.
+
+INSTALLED_APPS = [
+    'drone'
+]
+
+*********************************************************************************************************************************
+6-Configurar a primeira view.py (Arquivo que foi criado dentro do app. Nesse caso o app do drone):
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def home_page(request):
+    return HttpResponse("1. Projeto -> Django startproject nome_do_projeto;<br>"
+                        "2. Aplica migrations dos apps default;<br>"
+                        "3. Criei meu primeiro app -> django startapp nome_do_app;<br>"
+                        "4. Configurar minha primeira view (dentro do app, criar meu método de retorno);<br>")
+*********************************************************************************************************************************
+
+7-Configurar o Dispatcher do app (criar o url.py dentro do app que foi criado (Drone))
+
+from django.urls import path
+from .views import home_page
+
+urlpatterns = [
+    path('2/', home_page)  # Rota para a página inicial do app 'drone'
+     #Nesta linha, estamos definindo que, quando a URL for apenas a raiz do app (novamente, http://127.0.0.1:8000/), a função home_page deve ser chamada. 
+]
+****************************************************************************************************************************************
+
+8-Configurar a url.py do PROJETO para conhecer o urls do app
+
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('1', include('drone.urls')), # Rota para incluir as URLs do app 'drone'
+    #O '' indica que, para a URL raiz (ou seja, http://127.0.0.1:8000/), o Django deve procurar as URLs definidas em drone.urls.
+    # path('produto/', include('drone.urls')) 
+]
